@@ -1,5 +1,7 @@
 module Main (main) where
 import Data.Char
+import InteractiveEval (Term(val))
+import Data.Text.Internal.Encoding.Utf32 (validate)
 
 -- Ex 7 Minimum Length
 checkPasswordLength :: String -> Maybe String
@@ -32,10 +34,15 @@ ultimatePassword xs = case cleanWhitespace xs of
       Nothing -> Nothing
       Just ts -> Just ts
   
+validatePassword :: String -> Maybe String
+validatePassword password =
+  cleanWhitespace password 
+    >>= requireAlphaNum
+    >>= checkPasswordLength
 
 -- can run with stack repl
 main :: IO ()
 main = do
   putStrLn "Please enter a password"
   password <- getLine
-  print $ requireAlphaNum password
+  print $ validatePassword password
