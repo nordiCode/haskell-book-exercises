@@ -46,6 +46,12 @@ doubleList = do
       maxS = (read s2 :: Int)
   putStrLn $ "Your list " <> show numList
 
+lookForThree :: [Integer]
+lookForThree = do
+    a <- [1,2,3]
+    b <- [a + 1]
+    if b == 3 then [] else [b]
+
 main :: IO ()
 main = do
-  doubleList
+  print lookForThree
