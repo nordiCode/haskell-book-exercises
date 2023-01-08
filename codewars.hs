@@ -2,6 +2,9 @@ module Main where
 
 import Data.Char as C
 import Data.List
+import Data.Maybe (fromMaybe)
+import Maybes (fromJust)
+
 
 safeHead :: [Char] -> Char
 safeHead [] = ' '
@@ -54,7 +57,6 @@ multiples n = [x | x <- [0..], x `mod` n == 0]
 
 --  1^n / 3n-2
 
-
 -- seriesThree = [1^n / (3* n-2 ) | n <- [0..]]
 
 
@@ -67,9 +69,20 @@ isSortedAndHow lst
   | reverse  (sort lst) == lst = "yes, descending"
   | otherwise = "no"
 
+removeSmallest :: [Int] -> [Int]
+removeSmallest xs = error "todo: removeSmallest"
+
+strEnding :: String -> String -> String 
+strEnding str end = reverse $ take (length end) . reverse $ str
+
+solution :: String -> String -> Bool 
+solution str end = strEnding str end == end 
+
+
+
 main :: IO ()
 main = do
-  -- print $ isSortedAndHow [9,7,4,1]
-  print $ take 5 $ multiples 2
-  print $ take 5 seqEq
-  -- print $ take 5 seriesThree
+  let a ="abc"
+  let b = "bc"
+  print $ strEnding "abc" "bc"
+  print $ solution "abc" "d"
