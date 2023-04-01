@@ -3,6 +3,7 @@ module Main where
 import Data.List
 import System.Process
 
+-- message to make commit
 main :: IO ()
 main = do
   output <- readProcess "git" ["log", "--format=%ad %s"] ""
