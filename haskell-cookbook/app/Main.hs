@@ -1,18 +1,14 @@
 module Main where
 
 import MyLib
-import Control.Monad.State
-
-incrementState :: State Int Int
-incrementState = do
-  n <- get 
-  put (n + 1)
-  return n
-
-firstTuple :: (Int,Int) -> Int
-firstTuple (x,_) = x
+import System.Environment
+import MyLib (printHelpText)
 
 main :: IO ()
-main = do
-  let x = runState incrementState 1
-  print $ firstTuple x
+main = do 
+  cliArgs <- getArgs
+  let mFilePath = parseArguments cliArgs
+  maybe
+    (printHelpText "Missing filename")
+    (\filePath -> putStrLn filePath)
+    mFilePath
